@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "TypeMind",
+  "productName": "Fluently",
   "version": "0.1.0",
   "identifier": "com.typemind.app",
   "build": {
@@ -14,8 +14,8 @@
       {
         "label": "main",
         "title": "TypeMind",
-        "width": 420,
-        "height": 280,
+        "width": 550,
+        "height": 450,
         "decorations": false,
         "transparent": true,
         "alwaysOnTop": true,
@@ -30,7 +30,7 @@
     },
     "trayIcon": {
       "iconPath": "icons/32x32.png",
-      "tooltip": "TypeMind — Think in Bangla, Write in English"
+      "tooltip": "Fluently — English Communication Improvement"
     }
   },
   "bundle": {

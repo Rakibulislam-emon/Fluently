@@ -1,6 +1,6 @@
 use tauri::{
     AppHandle, Emitter, Manager,
-    menu::{Menu, MenuItem, CheckMenuItem},
+    menu::{Menu, MenuItem},
     tray::TrayIconBuilder,
 };
 use tauri_plugin_clipboard_manager::ClipboardExt;
@@ -133,24 +133,17 @@ pub fn run() {
         ])
         .setup(|app| {
             // --- System Tray ---
-            let mode_translate = CheckMenuItem::with_id(app, "mode-translate", "Mode: Translate Banglish", true, false, None::<&str>)?;
-            let mode_polish = CheckMenuItem::with_id(app, "mode-polish", "Mode: Fix English", true, true, None::<&str>)?;
-            let quit = MenuItem::with_id(app, "quit", "Quit TypeMind", true, None::<&str>)?;
-            let menu = Menu::with_items(app, &[&mode_translate, &mode_polish, &quit])?;
+            let quit = MenuItem::with_id(app, "quit", "Quit Fluently", true, None::<&str>)?;
+            let menu = Menu::with_items(app, &[&quit])?;
 
-            let app_handle_tray = app.handle().clone();
             TrayIconBuilder::new()
                 .icon(app.default_window_icon().unwrap().clone())
-                .tooltip("TypeMind — Invisible Communication Enhancer")
+                .tooltip("Fluently — English Communication Improvement")
                 .menu(&menu)
                 .on_menu_event(move |_app, event| {
                     let id = event.id.as_ref();
                     if id == "quit" {
                         std::process::exit(0);
-                    } else if id == "mode-translate" || id == "mode-polish" {
-                        // Tell frontend to update mode
-                        let mode_str = if id == "mode-translate" { "translate" } else { "polish" };
-                        let _ = app_handle_tray.emit("set-mode-from-tray", mode_str);
                     }
                 })
                 .build(app)?;
@@ -183,5 +176,5 @@ pub fn run() {
             Ok(())
         })
         .run(tauri::generate_context!())
-        .expect("error while running TypeMind");
+        .expect("error while running Fluently");
 }

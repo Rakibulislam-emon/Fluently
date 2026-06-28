@@ -6,11 +6,9 @@
  * No streaming — single response for short outputs.
  */
 import { sanitize } from "./sanitizer";
-import { TRANSLATE_PROMPT, POLISH_PROMPT } from "../prompts/rewrite";
+import { POLISH_PROMPT } from "../prompts/rewrite";
 
 const TIMEOUT_MS = 4000;
-
-export type RewriteMode = "translate" | "polish";
 
 /**
  * Get the API key from localStorage.
@@ -22,9 +20,8 @@ function getApiKey(): string {
 
 export async function rewriteText(
   text: string,
-  mode: RewriteMode,
   signal?: AbortSignal,
-): Promise<{ rewrittenText: string; detectedLanguage: string }> {
+): Promise<{ rewrittenText: string }> {
   const apiKey = getApiKey();
   if (!apiKey) {
     throw new Error("API key not set. Open settings to add your key.");
@@ -59,7 +56,7 @@ export async function rewriteText(
         messages: [
           { 
             role: "system", 
-            content: mode === "translate" ? TRANSLATE_PROMPT : POLISH_PROMPT 
+            content: POLISH_PROMPT 
           },
           { role: "user", content: userMessage },
         ],
@@ -90,14 +87,12 @@ export async function rewriteText(
     } catch {
       // Fallback if the model fails to return valid JSON
       parsed = { 
-        detected_language: "english", 
         rewritten_text: rawOutput 
       };
     }
 
     return {
       rewrittenText: sanitize(parsed.rewritten_text || ""),
-      detectedLanguage: parsed.detected_language || "english",
     };
   } catch (err: unknown) {
     clearTimeout(timeoutId);

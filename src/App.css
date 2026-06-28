@@ -1,9 +1,9 @@
 /**
- * TypeMind Popup Styles
+ * Fluently Popup Styles
  *
  * Minimal utility design. Tiny, fast, invisible, frictionless.
  * Dark background, no glassmorphism, no glow, no blur.
- * Rule 13: Utility software should disappear into workflow.
+ * Standard neutral dark palette.
  */
 
 * {
@@ -21,13 +21,15 @@ html, body, #root {
 
 /* --- Popup Container --- */
 .popup-container {
-  background: #1a1a2e;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #111111;
+  border: 1px solid #2a2a2a;
   border-radius: 12px;
-  padding: 16px;
-  max-width: 420px;
+  padding: 16px 20px;
+  max-width: 500px;
   width: 100%;
-  color: #e0e0e0;
+  max-height: 410px;
+  overflow-y: auto;
+  color: #eeeeee;
   font-size: 14px;
   line-height: 1.5;
   animation: fadeIn 100ms ease-out;
@@ -44,73 +46,44 @@ html, body, #root {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 8px 0;
+  padding: 12px 0;
 }
 
 .idle-text {
   font-size: 13px;
-  color: #888;
+  color: #888888;
+  font-weight: 500;
 }
 
 .idle-hint {
   font-size: 11px;
-  color: #555;
+  color: #555555;
 }
 
 /* --- Sections --- */
-.mode-selector {
-  display: flex;
-  background: #111122;
-  border-radius: 8px;
-  padding: 4px;
-  margin-bottom: 12px;
-  gap: 4px;
-}
-
-.mode-btn {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: #666;
-  font-size: 12px;
-  padding: 6px 0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 120ms;
-}
-
-.mode-btn:hover {
-  color: #aaa;
-}
-
-.mode-btn.active {
-  background: #1a1a2e;
-  color: #fff;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
 .section {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .label {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: #666;
+  color: #777777;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 /* --- Input Preview --- */
 .input-text {
-  color: #888;
+  color: #999999;
   font-size: 13px;
 }
 
 /* --- Output --- */
 .output-text {
-  color: #fff;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 500;
 }
@@ -119,7 +92,7 @@ html, body, #root {
 .loading-section {
   display: flex;
   justify-content: center;
-  padding: 8px 0;
+  padding: 12px 0;
 }
 
 .loading-dots {
@@ -131,7 +104,7 @@ html, body, #root {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #555;
+  background: #666666;
   animation: pulse 1s ease-in-out infinite;
 }
 
@@ -150,7 +123,7 @@ html, body, #root {
 
 /* --- Error --- */
 .error-text {
-  color: #e94560;
+  color: #ff5555;
   font-size: 13px;
 }
 
@@ -159,62 +132,65 @@ html, body, #root {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .btn-replace {
-  background: #16213e;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 6px 16px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 120ms;
+  transition: opacity 120ms;
 }
 
 .btn-rewrite {
-  background: #2a2a3e;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 6px 16px;
+  background: #2a2a2a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   transition: background 120ms;
 }
 
 .btn-rewrite:hover {
-  background: #3a3a4e;
+  background: #333333;
 }
 
 .btn-replace:hover {
-  background: #1a2a4a;
+  opacity: 0.85;
 }
 
 .btn-close {
   background: transparent;
-  color: #666;
+  color: #666666;
   border: none;
   padding: 6px 10px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   border-radius: 6px;
   transition: color 120ms;
 }
 
 .btn-close:hover {
-  color: #e94560;
+  color: #ff5555;
 }
 
 /* --- Settings Button --- */
 .btn-settings {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   background: transparent;
   border: none;
-  color: #666;
+  color: #666666;
   font-size: 14px;
   cursor: pointer;
   transition: color 120ms;
@@ -222,14 +198,14 @@ html, body, #root {
 }
 
 .btn-settings:hover {
-  color: #e0e0e0;
+  color: #eeeeee;
 }
 
 /* --- Settings Screen --- */
 .settings-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .settings-header {
@@ -241,100 +217,208 @@ html, body, #root {
 .btn-back {
   background: transparent;
   border: none;
-  color: #888;
+  color: #888888;
   cursor: pointer;
   font-size: 13px;
+  font-weight: 500;
   transition: color 120ms;
 }
 
 .btn-back:hover {
-  color: #e0e0e0;
+  color: #eeeeee;
 }
 
 .settings-title {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .form-group label {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #666;
+  color: #777777;
+  font-weight: 600;
 }
 
 .input-api-key {
-  background: #121828;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1a1a1a;
+  border: 1px solid #333333;
   border-radius: 6px;
-  padding: 8px;
-  color: #fff;
+  padding: 10px;
+  color: #ffffff;
   font-size: 13px;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, monospace;
   outline: none;
   transition: border-color 120ms;
+  width: 100%;
 }
 
 .input-api-key:focus {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: #666666;
 }
 
 .help-text {
-  font-size: 11px;
-  color: #555;
+  font-size: 12px;
+  color: #666666;
 }
 
 .help-text a {
-  color: #3b82f6;
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #444444;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 120ms;
 }
 
 .help-text a:hover {
-  text-decoration: underline;
+  text-decoration-color: #ffffff;
 }
 
 .hotkey-display {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   align-items: center;
 }
 
 kbd {
-  background: #2a2a3e;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #222222;
+  border: 1px solid #333333;
   border-radius: 4px;
-  padding: 2px 6px;
+  padding: 4px 8px;
   font-size: 11px;
-  color: #ccc;
-  font-family: system-ui;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+  color: #dddddd;
+  font-family: ui-monospace, SFMono-Regular, monospace;
 }
 
 .settings-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .btn-save {
-  background: #16213e;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 6px 16px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
   font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 120ms;
+  transition: opacity 120ms;
 }
 
 .btn-save:hover {
-  background: #1a2a4a;
+  opacity: 0.85;
+}
+
+/* --- Enable/Disable Toggle --- */
+.btn-replace-toggle {
+  background: transparent;
+  color: #888888;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 120ms;
+  width: 100%;
+}
+
+.btn-replace-toggle:hover {
+  border-color: #555555;
+  color: #aaaaaa;
+}
+
+.btn-replace-toggle.disabled {
+  background: #2a1111;
+  color: #ff5555;
+  border-color: #441111;
+}
+
+.btn-replace-toggle.disabled:hover {
+  background: #3a1111;
+  border-color: #661111;
+}
+
+/* ===================================
+   FEEDBACK POPUP
+   Micro-learning after Ctrl+M rewrite.
+   Tiny, utility-like, auto-dismisses.
+   =================================== */
+
+.feedback-container {
+  animation: feedbackSlideIn 200ms ease-out;
+  padding: 16px 20px 12px;
+}
+
+@keyframes feedbackSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Checkmark — subtle success indicator */
+.feedback-check {
+  color: #4ade80;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* Diff line — the corrected text with inline changes */
+.feedback-diff {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #cccccc;
+}
+
+.feedback-word {
+  color: #cccccc;
+}
+
+.feedback-change {
+  display: inline;
+}
+
+/* Old word — muted red with strikethrough */
+.feedback-from {
+  color: #f87171;
+  text-decoration: line-through;
+  text-decoration-color: rgba(248, 113, 113, 0.5);
+  opacity: 0.7;
+  font-size: 15px;
+}
+
+/* New word — green */
+.feedback-to {
+  color: #4ade80;
+  font-weight: 500;
+}
+
+/* Explanation — tiny, muted, one-line */
+.feedback-explanation {
+  font-size: 14px;
+  color: #777777;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Dismiss hint */
+.feedback-dismiss {
+  font-size: 11px;
+  color: #444444;
+  text-align: right;
+  letter-spacing: 0.3px;
 }

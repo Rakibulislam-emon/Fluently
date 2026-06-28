@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useStore } from "../store";
 
 interface SettingsProps {
   onBack: () => void;
@@ -8,6 +9,7 @@ export default function Settings({ onBack }: SettingsProps) {
   const [apiKey, setApiKey] = useState("");
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  const { showFeedbackPopup, setShowFeedbackPopup } = useStore();
 
   useEffect(() => {
     const key = localStorage.getItem("typemind_groq_key") || "";
@@ -57,8 +59,23 @@ export default function Settings({ onBack }: SettingsProps) {
         <div className="form-group">
           <label>Global Hotkey</label>
           <div className="hotkey-display">
-            <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd>
+            <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd>
           </div>
+        </div>
+
+        <div className="form-group">
+          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', textTransform: 'none', color: '#eeeeee' }}>
+            <input 
+              type="checkbox" 
+              checked={showFeedbackPopup}
+              onChange={(e) => setShowFeedbackPopup(e.target.checked)}
+              style={{ cursor: 'pointer' }}
+            />
+            Show Explanation Popup on Auto-Replace
+          </label>
+          <p className="help-text" style={{ marginTop: '4px' }}>
+            When disabled, text will be replaced silently without showing the visual difference and explanation.
+          </p>
         </div>
       </div>
 

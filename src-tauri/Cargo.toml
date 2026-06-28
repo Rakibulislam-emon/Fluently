@@ -1,7 +1,7 @@
 [package]
 name = "typemind"
 version = "0.1.0"
-description = "TypeMind — Think in Bangla, Write in Natural English"
+description = "Fluently — English Communication Improvement"
 authors = ["you"]
 edition = "2021"
 

@@ -7,21 +7,16 @@
 import { create } from "zustand";
 import { rewriteText } from "./services/groq";
 
-import type { RewriteMode } from "./services/groq";
-
-type Language = "bangla" | "banglish" | "english";
-
 interface TypeMindState {
   inputText: string;
   outputText: string;
-  detectedLanguage: Language | null;
   isLoading: boolean;
   error: string | null;
-  mode: RewriteMode;
   isEnabled: boolean;
+  showFeedbackPopup: boolean;
 
-  setMode: (mode: RewriteMode) => void;
   setIsEnabled: (enabled: boolean) => void;
+  setShowFeedbackPopup: (show: boolean) => void;
   setInput: (text: string) => void;
   processText: () => void;
   reset: () => void;
@@ -35,31 +30,29 @@ const COOLDOWN_MS = 500;
 export const useStore = create<TypeMindState>((set, get) => ({
   inputText: "",
   outputText: "",
-  detectedLanguage: null,
   isLoading: false,
   error: null,
-  mode: (localStorage.getItem("typemind_mode") as RewriteMode) || "polish",
   isEnabled: localStorage.getItem("typemind_enabled") !== "false",
+  showFeedbackPopup: localStorage.getItem("typemind_show_feedback") !== "false",
 
-  setMode: (mode) => {
-    localStorage.setItem("typemind_mode", mode);
-    set({ mode, outputText: "", error: null });
-  },
-  
   setIsEnabled: (enabled) => {
     localStorage.setItem("typemind_enabled", enabled ? "true" : "false");
     set({ isEnabled: enabled });
+  },
+
+  setShowFeedbackPopup: (show) => {
+    localStorage.setItem("typemind_show_feedback", show ? "true" : "false");
+    set({ showFeedbackPopup: show });
   },
 
   setInput: (text) => set({ 
     inputText: text.trim(), 
     outputText: "", 
     error: null,
-    detectedLanguage: null
   }),
 
   processText: async () => {
-    const { inputText, mode } = get();
+    const { inputText } = get();
     const now = Date.now();
 
     // Debounce: ignore if triggered too fast
@@ -77,19 +70,17 @@ export const useStore = create<TypeMindState>((set, get) => ({
 
     set({
       outputText: "",
-      detectedLanguage: null,
       isLoading: true,
       error: null,
     });
 
     try {
-      const result = await rewriteText(inputText, mode, controller.signal);
+      const result = await rewriteText(inputText, controller.signal);
 
       // Only update if this request wasn't cancelled
       if (!controller.signal.aborted) {
         set({ 
           outputText: result.rewrittenText, 
-          detectedLanguage: result.detectedLanguage.toLowerCase() as Language,
           isLoading: false 
         });
       }
@@ -109,7 +100,6 @@ export const useStore = create<TypeMindState>((set, get) => ({
     set({
       inputText: "",
       outputText: "",
-      detectedLanguage: null,
       isLoading: false,
       error: null,
     });
